@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 USER $NB_UID
 
 # Install Tensorflow
-RUN pip install --quiet \
+RUN pip install --quiet --no-cache-dir \
     'tensorflow-gpu==2.1.0' && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
