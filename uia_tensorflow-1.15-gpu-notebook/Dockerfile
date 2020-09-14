@@ -2,6 +2,7 @@
 # Distributed under the terms of the Modified BSD License.
 ARG BASE_CONTAINER=jupyter/scipy-notebook
 FROM $BASE_CONTAINER
+ARG PYTHON_VERSION=3.7
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
@@ -18,7 +19,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 USER $NB_UID
 
 # Install Tensorflow
-RUN pip install --no-cache-dir --quiet \
-    'tensorflow-gpu==1.15.2' && \
+RUN python3.7 -m pip install --no-cache-dir --quiet \
+    'tensorflow-gpu==1.15.3' && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER

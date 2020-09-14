@@ -10,7 +10,9 @@ CUDA_10_1=nvidia_cuda_10.1-cudnn7-devel
 CUDA_10_2=nvidia_cuda_10.2-cudnn7-devel
 
 building_func_name(){
-    echo "$green === Building ${FUNCNAME[1]} ===$normal" >&2
+    echo -e "\n$green   ===============================$normal"
+    echo -e "$green      Building ${FUNCNAME[1]}    $normal" >&2
+    echo -e "$green   ===============================$normal\n"
 }
 
 cd_up(){
@@ -44,31 +46,47 @@ scipy_notebook(){
     docker build -t $REG/jupyter/scipy-notebook:$CUDA_10_1 --build-arg BASE_CONTAINER=$REG/jupyter/minimal-notebook:$CUDA_10_1 .
 }
 
+
+pytorch_1.6.0_cpu(){
+    # Build pytorch-1.6.0-notebook
+    building_func_name
+    cd ./uia_pytorch-1.6.0-cpu-notebook
+    docker build -t $REG/jupyter/pytorch-1.6.0-notebook --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook .
+}
+
+pytorch_1.6.0_gpu(){
+    # Build pytorch-1.6.0-gpu-notebook
+    building_func_name
+    cd ./uia_pytorch-1.6.0-gpu-notebook
+    docker build -t $REG/jupyter/pytorch-1.6.0-gpu-notebook:$CUDA_10_0 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_0 .
+}
+
+
 tensorflow_1.15_cpu(){
     # Build tensorflow-v1-notebook
     building_func_name
-    cd ./tensorflow-v1-notebook
+    cd ./uia_tensorflow-1.15-cpu-notebook
     docker build -t $REG/jupyter/tensorflow-v1-notebook --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook .
 }
 
 tensorflow_1.15_gpu(){
     # Build tensorflow-v1-gpu-notebook
     building_func_name
-    cd ./tensorflow-v1-gpu-notebook
+    cd ./uia_tensorflow-1.15-gpu-notebook
     docker build -t $REG/jupyter/tensorflow-v1-gpu-notebook:$CUDA_10_0 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_0 .
 }
 
 tensorflow_2.3_cpu(){
     # Build tensorflow-v2-notebook
     building_func_name
-    cd ./tensorflow-v2-notebook
+    cd ./uia_tensorflow-2.3-cpu-notebook
     docker build -t $REG/jupyter/tensorflow-v2-notebook --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook .
 }
 
 tensorflow_2.3_gpu(){
     # Build tensorflow-v2-gpu-notebook
     building_func_name
-    cd ./tensorflow-v2-gpu-notebook
+    cd ./uia_tensorflow-2.3-gpu-notebook
     docker build -t $REG/jupyter/tensorflow-v2-gpu-notebook:$CUDA_10_1 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_1 .
 }
 
@@ -92,4 +110,10 @@ tensorflow_2.3_cpu
 cd_up
 
 tensorflow_2.3_gpu
+cd_up
+
+pytorch_1.6.0_cpu
+cd_up
+
+pytorch_1.6.0_gpu
 cd_up
