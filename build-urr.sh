@@ -109,25 +109,10 @@ build(){
     scipy_notebook
     tensorflow_1.15_cpu
     tensorflow_1.15_gpu
-#    tensorflow_2.3_cpu
-#    tensorflow_2.3_gpu
-#    pytorch_1.6.0_cpu
-#    pytorch_1.6.0_gpu
+    tensorflow_2.3_cpu
+    tensorflow_2.3_gpu
+    pytorch_1.6.0_cpu
+    pytorch_1.6.0_gpu
 }
 
-#push(){}
-
-usage(){
-    echo "usage: build_urr.sh
-    -b | --build - Will build all images
-    -p | --push - push the image to the registry"
-}
-
-while [ "$1" != "" ]; do
-    case $1 in
-        -b | --build ) build;;
-        -i | --interactive ) push;;
-        -h | --help ) usage;exit;;
-        *) usage;exit 1;;
-    esac
-done
+build
