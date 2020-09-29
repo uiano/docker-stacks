@@ -10,7 +10,8 @@ USER root
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
 
-RUN echo "Bendik i Tårnet" >> /home/jovyan/.fidje
+RUN touch /home/$NB_USER/.fidje && \
+  echo "Bendik i Tårnet" >> /home/$NB_USER/.fidje
 
 # Install PyTorch
 RUN pip install --quiet --no-cache-dir \
