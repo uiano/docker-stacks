@@ -21,9 +21,3 @@ for image in client.images.list():
             ...
     except IndexError:
         ...
-
-
-#>>> from docker import Client
-#>>> cli = Client(base_url='tcp://127.0.0.1:2375')
-#>>> response = [line for line in cli.push('yourname/app', stream=True)]
-#>>> response
