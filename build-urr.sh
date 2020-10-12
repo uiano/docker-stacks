@@ -102,6 +102,14 @@ tensorflow_2.3_gpu(){
     cd_up
 }
 
+spinningup_ray_io(){
+    # Build tensorflow-v2-gpu-notebook
+    building_func_name
+    cd ./uia_rlib_openai-spinnup-gpu-notebook
+    docker build -t $REG/jupyter/spinningup:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_2 .
+    cd_up
+}
+
 ### MAIN
 build(){
     base_notebook
@@ -113,6 +121,7 @@ build(){
     tensorflow_2.3_gpu
     pytorch_1.6.0_cpu
     pytorch_1.6.0_gpu
+    spinningup_ray_io
 }
 
 build
