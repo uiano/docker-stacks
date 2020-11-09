@@ -1,0 +1,6 @@
+torchvision
+torchsummary
+nltk
+pandas
+numpy
+matplotlib

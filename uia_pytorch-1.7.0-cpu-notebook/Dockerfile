@@ -1,5 +1,3 @@
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
 ARG BASE_CONTAINER=jupyter/scipy-notebook
 FROM $BASE_CONTAINER
 
@@ -15,6 +13,7 @@ RUN touch /home/$NB_USER/.fidje && \
 
 # Install PyTorch
 RUN pip install --quiet --no-cache-dir \
-    'torch==1.6.0' && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+  'torch==1.7.0+cpu' 'torchvision==0.8.1+cpu' 'torchaudio==0.7.0' 'nltk' 'torchsummary' \
+  -f https://download.pytorch.org/whl/torch_stable.html && \
+  fix-permissions $CONDA_DIR && \
+  fix-permissions /home/$NB_USER

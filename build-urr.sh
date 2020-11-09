@@ -8,6 +8,7 @@ REG=urr.uia.no
 CUDA_10_0=nvidia_cuda_10.0-cudnn7-devel
 CUDA_10_1=nvidia_cuda_10.1-cudnn7-devel
 CUDA_10_2=nvidia_cuda_10.2-cudnn7-devel
+CUDA_11_0=nvidia_cuda_11.0-cudnn7-devel
 
 building_func_name(){
     echo -e "\n$green   ===============================$normal"
@@ -27,6 +28,7 @@ base_notebook(){
     docker build -t $REG/jupyter/base-notebook:$CUDA_10_0 --build-arg BASE_CONTAINER=nvidia/cuda:10.0-cudnn7-devel .
     docker build -t $REG/jupyter/base-notebook:$CUDA_10_1 --build-arg BASE_CONTAINER=nvidia/cuda:10.1-cudnn7-devel .
     docker build -t $REG/jupyter/base-notebook:$CUDA_10_2 --build-arg BASE_CONTAINER=nvidia/cuda:10.2-cudnn7-devel .
+    #docker build -t $REG/jupyter/base-notebook:$CUDA_11_0 --build-arg BASE_CONTAINER=nvidia/cuda:11.0-cudnn7-devel .
     cd_up
 }
 
@@ -38,6 +40,7 @@ minimal_noteboot(){
     docker build -t $REG/jupyter/minimal-notebook:$CUDA_10_0 --build-arg BASE_CONTAINER=$REG/jupyter/base-notebook:$CUDA_10_0 .
     docker build -t $REG/jupyter/minimal-notebook:$CUDA_10_1 --build-arg BASE_CONTAINER=$REG/jupyter/base-notebook:$CUDA_10_1 .
     docker build -t $REG/jupyter/minimal-notebook:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/base-notebook:$CUDA_10_2 .
+    #docker build -t $REG/jupyter/minimal-notebook:$CUDA_11_0 --build-arg BASE_CONTAINER=$REG/jupyter/base-notebook:$CUDA_11_0 .
     cd_up
 }
 
@@ -49,23 +52,25 @@ scipy_notebook(){
     docker build -t $REG/jupyter/scipy-notebook:$CUDA_10_0 --build-arg BASE_CONTAINER=$REG/jupyter/minimal-notebook:$CUDA_10_0 .
     docker build -t $REG/jupyter/scipy-notebook:$CUDA_10_1 --build-arg BASE_CONTAINER=$REG/jupyter/minimal-notebook:$CUDA_10_1 .
     docker build -t $REG/jupyter/scipy-notebook:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/minimal-notebook:$CUDA_10_2 .
+    #docker build -t $REG/jupyter/scipy-notebook:$CUDA_11_0 --build-arg BASE_CONTAINER=$REG/jupyter/minimal-notebook:$CUDA_11_0 .
     cd_up
 }
 
 
-pytorch_1.6.0_cpu(){
-    # Build pytorch-1.6.0-notebook
+pytorch_1.7.0_cpu(){
+    # Build pytorch-1.7.0-notebook
     building_func_name
-    cd ./uia_pytorch-1.6.0-cpu-notebook
-    docker build -t $REG/jupyter/pytorch-1.6.0-notebook --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook .
+    cd ./uia_pytorch-1.7.0-cpu-notebook
+    docker build -t $REG/jupyter/pytorch-1.7.0-notebook --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook .
     cd_up
 }
 
-pytorch_1.6.0_gpu(){
-    # Build pytorch-1.6.0-gpu-notebook
+pytorch_1.7.0_gpu(){
+    # Build pytorch-1.7.0-gpu-notebook
     building_func_name
-    cd ./uia_pytorch-1.6.0-gpu-notebook
-    docker build -t $REG/jupyter/pytorch-1.6.0-gpu-notebook:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_2 .
+    cd ./uia_pytorch-1.7.0-gpu-notebook
+    docker build -t $REG/jupyter/pytorch-1.7.0-gpu-notebook:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_2 .
+    #docker build -t $REG/jupyter/pytorch-1.7.0-gpu-notebook:$CUDA_11_0 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_11_0 .
     cd_up
 }
 
@@ -102,14 +107,6 @@ tensorflow_2.3_gpu(){
     cd_up
 }
 
-spinningup_ray_io(){
-    # Build tensorflow-v2-gpu-notebook
-    building_func_name
-    cd ./uia_rlib_openai-spinnup-gpu-notebook
-    docker build -t $REG/jupyter/spinningup:$CUDA_10_2 --build-arg BASE_CONTAINER=$REG/jupyter/scipy-notebook:$CUDA_10_2 .
-    cd_up
-}
-
 ### MAIN
 build(){
     base_notebook
@@ -121,7 +118,6 @@ build(){
     tensorflow_2.3_gpu
     pytorch_1.6.0_cpu
     pytorch_1.6.0_gpu
-    spinningup_ray_io
 }
 
 build
