@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     libxrender1 \
     lmodern \
     netcat \
-    python-dev \
     # ---- nbconvert dependencies ----
     texlive-xetex \
     texlive-fonts-recommended \
@@ -28,8 +27,11 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     # ----
     tzdata \
     unzip \
-    nano \
+    nano-tiny \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create alternative for nano -> nano-tiny
+RUN update-alternatives --install /usr/bin/nano nano /bin/nano-tiny 10
 
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID

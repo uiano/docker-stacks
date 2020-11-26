@@ -15,14 +15,12 @@ repos:
     rev: 2.0.0
     hooks:
       - id: bashate
-  - repo: local
+        args: ['--ignore=E006']
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.3
     hooks:
-      - id: hadolint
-        name: Hadolint linter
-        description: Runs Hadolint to check for Dockerfile best practices
-        language: system
-        # Exclude ppc64le Dockerfile since cannot check their build easily
-        exclude: ppc64
-        types:
-          - dockerfile
-        entry: hadolint
+      - id: flake8
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v1.5.4
+    hooks:
+      - id: autopep8

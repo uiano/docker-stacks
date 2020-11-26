@@ -50,7 +50,7 @@ and versioning strategy.
 - [TeX Live](https://www.tug.org/texlive/) for notebook document conversion
 - [git](https://git-scm.com/), [emacs](https://www.gnu.org/software/emacs/) (actually `emacs-nox`),
   [vi](https://vim.org/) (actually `vim-tiny`), [jed](https://www.jedsoft.org/jed/),
-  [nano](https://www.nano-editor.org/), tzdata, and unzip
+  [nano](https://www.nano-editor.org/) (actually `nano-tiny`), tzdata, and unzip
 
 ### jupyter/r-notebook
 
@@ -63,12 +63,7 @@ and versioning strategy.
 - Everything in `jupyter/minimal-notebook` and its ancestor images
 - The [R](https://www.r-project.org/) interpreter and base environment
 - [IRKernel](https://irkernel.github.io/) to support R code in Jupyter notebooks
-- [tidyverse](https://www.tidyverse.org/) packages, including [ggplot2](http://ggplot2.org/),
-  [dplyr](http://dplyr.tidyverse.org/), [tidyr](http://tidyr.tidyverse.org/),
-  [readr](http://readr.tidyverse.org/), [purrr](http://purrr.tidyverse.org/),
-  [tibble](http://tibble.tidyverse.org/), [stringr](http://stringr.tidyverse.org/),
-  [lubridate](http://lubridate.tidyverse.org/), and
-  [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html) from
+- [tidyverse](https://www.tidyverse.org/) packages from
   [conda-forge](https://conda-forge.github.io/feedstocks)
 - [devtools](https://cran.r-project.org/web/packages/devtools/index.html),
   [shiny](https://shiny.rstudio.com/), [rmarkdown](http://rmarkdown.rstudio.com/),
@@ -245,6 +240,11 @@ core images and link them below.
   Docker Stack image. The image includes major geospatial Python & R libraries on top of the
   datascience-notebook image. Try it on
   binder:[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/SCiO-systems/cgspatial-notebook/master)
+
+- [kotlin-notebook](https://github.com/knonm/kotlin-notebook) is a community Jupyter
+  Docker Stack image. The image includes [Kotlin kernel for Jupyter/IPython](https://github.com/Kotlin/kotlin-jupyter) on top of the
+  `base-notebook` image. Try it on
+  Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/knonm/kotlin-notebook/main)
 
 See the [contributing guide](../contributing/stacks.md) for information about how to create your own
 Jupyter Docker Stack.
