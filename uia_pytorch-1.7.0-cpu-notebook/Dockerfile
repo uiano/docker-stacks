@@ -15,5 +15,6 @@ RUN touch /home/$NB_USER/.fidje && \
 RUN pip install --quiet --no-cache-dir \
   'torch==1.7.0+cpu' 'torchvision==0.8.1+cpu' 'torchaudio==0.7.0' 'nltk' 'torchsummary' \
   -f https://download.pytorch.org/whl/torch_stable.html && \
+  pip uninstall jedi --yes && \
   fix-permissions $CONDA_DIR && \
-  fix-permissions /home/$NB_USER
+  fix-permissions /home/$NB_USER 

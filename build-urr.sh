@@ -116,8 +116,8 @@ build(){
     tensorflow_1.15_gpu
     tensorflow_2.3_cpu
     tensorflow_2.3_gpu
-    pytorch_1.6.0_cpu
-    pytorch_1.6.0_gpu
+    pytorch_1.7.0_cpu
+    pytorch_1.7.0_gpu
 }
 
 build
